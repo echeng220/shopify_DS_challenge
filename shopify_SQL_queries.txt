@@ -1,0 +1,28 @@
+/*QUESTION 1*/
+SELECT COUNT(OrderID), ShipperName
+FROM Orders as o
+JOIN Shippers as s
+ON s.ShipperID = o.ShipperID
+WHERE s.ShipperName == 'Speedy Express'
+GROUP BY ShipperName;
+
+/*QUESTION 2*/
+SELECT COUNT(o.OrderID) as TotalOrders, e.LastName
+FROM Orders as o
+JOIN Employees as e
+ON o.EmployeeID == e.EmployeeID
+GROUP BY e.EmployeeID
+ORDER BY COUNT(o.OrderID) DESC;
+
+/*QUESTION 3*/
+SELECT COUNT(o.OrderID) as TotalOrders, p.ProductName
+FROM Orders as o
+JOIN Customers as c
+ON o.CustomerID == c.CustomerID
+JOIN OrderDetails as d
+ON o.OrderID == d.OrderID
+JOIN Products as P
+ON d.ProductID == p.ProductID
+WHERE c.Country == 'Germany'
+GROUP BY p.ProductName
+ORDER BY COUNT(o.OrderID) DESC;
